@@ -1,7 +1,12 @@
 import socket
+import threading
 import config
+from reciever import recieve
+from sender import send
 def main():
     server,username=connect()
+    threading.Thread(target=recieve,args=(server,),daemon=True).start()
+    send(server)
 
 def connect():
     username=input("Enter your username: ")
